@@ -7,7 +7,7 @@
             </p>
 
             @auth
-                <a href="{{ url('/create/article') }}" class="btn btn-warning btn-lg fw-semibold">
+                <a href="{{ route('articles.create') }}" class="btn btn-warning btn-lg fw-semibold">
                     Inserisci annuncio
                 </a>
             @else
