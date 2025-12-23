@@ -1,0 +1,25 @@
+:root {
+    --presto-bg: #f5f6fa;
+}
+
+body {
+    background: var(--presto-bg);
+}
+
+.hero-presto {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.85),
+        rgba(0, 0, 0, 0.55)
+    );
+    color: #fff;
+    border-radius: 1rem;
+}
+
+.footer-presto {
+    background: #111;
+}
+
+.footer-presto .text-muted {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
