@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Article;
 
 class PublicController extends Controller
 {
     public function homepage()
     {
-        return view('welcome');
+        $articles = Article::with(['category', 'user'])
+            ->latest()
+            ->take(6)
+            ->get();
+
+        return view('welcome', compact('articles'));
     }
 }

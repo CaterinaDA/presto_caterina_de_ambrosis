@@ -17,6 +17,34 @@
                     </a>
                 </li>
 
+                {{-- Dropdown categorie --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Categorie
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        @forelse ($categories as $category)
+                            <li>
+                                <a class="dropdown-item" href="{{ route('article.byCategory', $category) }}">
+                                    {{ $category->name }}
+                                </a>
+                            </li>
+
+                            @if (!$loop->last)
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            @endif
+                        @empty
+                            <li class="px-3 py-2 text-muted small">
+                                Nessuna categoria disponibile
+                            </li>
+                        @endforelse
+                    </ul>
+                </li>
+
                 {{-- Auth --}}
                 @auth
                     <li class="nav-item">

@@ -1,19 +1,22 @@
 <x-layout>
     <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="mb-0">Annunci</h2>
 
-            {{-- Auth --}}
-            @auth
-                <a class="btn btn-warning fw-semibold" href="{{ route('articles.create') }}">
-                    Inserisci annuncio
-                </a>
-            @endauth
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-2 mb-4">
+            <div>
+                <h2 class="mb-1">Categoria: {{ $category->name }}</h2>
+                <p class="text-muted mb-0">
+                    Annunci più recenti in questa categoria.
+                </p>
+            </div>
+
+            <a href="{{ route('articles.index') }}" class="btn btn-outline-dark btn-sm">
+                Torna a tutti gli annunci
+            </a>
         </div>
 
         @if ($articles->count() === 0)
             <div class="alert alert-info">
-                Nessun annuncio pubblicato.
+                Nessun annuncio in questa categoria.
             </div>
         @else
             <div class="row g-4">
@@ -28,5 +31,6 @@
                 {{ $articles->links() }}
             </div>
         @endif
+
     </div>
 </x-layout>

@@ -1,6 +1,14 @@
 <x-layout>
+
     <div class="container py-5">
         <h2>Login</h2>
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                Credenziali non valide.
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
