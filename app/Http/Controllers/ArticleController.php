@@ -15,12 +15,20 @@ class ArticleController extends Controller
 
     public function index()
     {
-        $articles = Article::with(['category', 'user'])->latest()->paginate(9);
+        $articles = Article::where('is_accepted', true)
+            ->with(['category', 'user'])
+            ->latest()
+            ->paginate(9);
+
         return view('article.index', compact('articles'));
     }
 
     public function show(Article $article)
     {
+        if (!$article->is_accepted && (!request()->user() || !request()->user()->is_revisor)) {
+            abort(404);
+        }
+
         $article->load(['category', 'user']);
         return view('article.show', compact('article'));
     }
@@ -28,6 +36,7 @@ class ArticleController extends Controller
     public function byCategory(Category $category)
     {
         $articles = $category->articles()
+            ->where('is_accepted', true)
             ->with(['category', 'user'])
             ->latest()
             ->paginate(9);

@@ -1,3 +1,10 @@
+{{-- Conteggio articoli da revisionare --}}
+@php
+    use App\Models\Article;
+    $toBeRevised = Article::toBeRevisedCount();
+@endphp
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container">
         <a class="navbar-brand fw-bold" href="{{ route('home') }}">Presto</a>
@@ -53,6 +60,17 @@
                         </a>
                     </li>
 
+                    {{-- Area revisore --}}
+                    @if (auth()->user()->is_revisor)
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('revisor.index') }}">
+                                Area Revisore
+                                <span class="badge bg-warning text-dark ms-1">{{ $toBeRevised }}</span>
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- Dropdown utente --}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
