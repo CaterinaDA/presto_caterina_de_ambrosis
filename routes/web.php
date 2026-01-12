@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Route;
 // Public Controller
 Route::get('/', [PublicController::class, 'homepage'])->name('home');
 
+Route::get('/search/article', [PublicController::class, 'searchArticles'])
+  ->name('articles.search');
+
 
 // Article Controller
 Route::get('/articles', [ArticleController::class, 'index'])->name('articles.index');

@@ -17,6 +17,17 @@
         <div class="collapse navbar-collapse" id="navPresto">
             <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
 
+                {{-- Search --}}
+                <li class="nav-item">
+                    <form class="d-flex" action="{{ route('articles.search') }}" method="GET">
+                        <input class="form-control form-control-sm me-2" type="search" name="query"
+                            placeholder="Cerca annunci..." aria-label="Search">
+                        <button class="btn btn-outline-warning btn-sm" type="submit">
+                            Cerca
+                        </button>
+                    </form>
+                </li>
+
                 {{-- Index pubblico --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('articles.index') }}">
