@@ -9,9 +9,13 @@ use Illuminate\Support\Facades\Route;
 
 // Public Controller
 Route::get('/', [PublicController::class, 'homepage'])->name('home');
-
+// search
 Route::get('/search/article', [PublicController::class, 'searchArticles'])
   ->name('articles.search');
+// set lingua
+Route::post('/set_language/{lang}', [PublicController::class, 'setLanguage'])
+  ->name('set_language');
+
 
 
 // Article Controller
@@ -28,6 +32,7 @@ Route::get('/articles/{article}', [ArticleController::class, 'show'])
 // Article Controller filtro per categoria
 Route::get('/category/{category}', [ArticleController::class, 'byCategory'])
   ->name('article.byCategory');
+
 
 
 // Revisor Controller

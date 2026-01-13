@@ -21,9 +21,9 @@
                 <li class="nav-item">
                     <form class="d-flex" action="{{ route('articles.search') }}" method="GET">
                         <input class="form-control form-control-sm me-2" type="search" name="query"
-                            placeholder="Cerca annunci..." aria-label="Search">
+                            placeholder="{{ __('ui.search_placeholder') }}" aria-label="Search">
                         <button class="btn btn-outline-warning btn-sm" type="submit">
-                            Cerca
+                            {{ __('ui.search_button') }}
                         </button>
                     </form>
                 </li>
@@ -31,7 +31,7 @@
                 {{-- Index pubblico --}}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('articles.index') }}">
-                        Annunci
+                        {{ __('ui.ads') }}
                     </a>
                 </li>
 
@@ -39,14 +39,14 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Categorie
+                        {{ __('ui.categories') }}
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end">
                         @forelse ($categories as $category)
                             <li>
                                 <a class="dropdown-item" href="{{ route('article.byCategory', $category) }}">
-                                    {{ $category->name }}
+                                    {{ __("ui.$category->name") }}
                                 </a>
                             </li>
 
@@ -57,17 +57,24 @@
                             @endif
                         @empty
                             <li class="px-3 py-2 text-muted small">
-                                Nessuna categoria disponibile
+                                {{ __('ui.no_categories') }}
                             </li>
                         @endforelse
                     </ul>
+                </li>
+
+                {{-- Selezione lingua --}}
+                <li class="nav-item d-flex align-items-center gap-2 me-lg-2">
+                    <x-_locale lang="it" />
+                    <x-_locale lang="en" />
+                    <x-_locale lang="es" />
                 </li>
 
                 {{-- Auth --}}
                 @auth
                     <li class="nav-item">
                         <a class="btn btn-warning btn-sm fw-semibold" href="{{ route('articles.create') }}">
-                            Inserisci annuncio
+                            {{ __('ui.create_ad') }}
                         </a>
                     </li>
 
@@ -75,7 +82,7 @@
                     @if (auth()->user()->is_revisor)
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('revisor.index') }}">
-                                Area Revisore
+                                {{ __('ui.revisor_area') }}
                                 <span class="badge bg-warning text-dark ms-1">{{ $toBeRevised }}</span>
                             </a>
                         </li>
@@ -85,14 +92,14 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
-                            Ciao, {{ auth()->user()->name }}
+                            {{ __('ui.hello') }}, {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
                                 <form action="{{ route('logout') }}" method="POST" class="m-0">
                                     @csrf
                                     <button class="dropdown-item" type="submit">
-                                        Logout
+                                        {{ __('ui.logout') }}
                                     </button>
                                 </form>
                             </li>
@@ -100,10 +107,10 @@
                     </li>
                 @else
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Registrati</a>
+                        <a class="nav-link" href="{{ route('register') }}">{{ __('ui.register') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Accedi</a>
+                        <a class="nav-link" href="{{ route('login') }}">{{ __('ui.login') }}</a>
                     </li>
                 @endauth
 

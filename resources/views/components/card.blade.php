@@ -3,7 +3,7 @@
 
         <div class="d-flex justify-content-between align-items-start mb-2">
             <span class="badge text-bg-dark">
-                {{ $article->category?->name ?? 'Senza categoria' }}
+                {{ $article->category ? __('ui.' . $article->category->name) : __('ui.no_category') }}
             </span>
 
             <span class="fw-bold">
@@ -21,21 +21,21 @@
 
         <div class="d-flex justify-content-between align-items-center mt-auto">
             <small class="text-muted">
-                di {{ $article->user?->name ?? 'Anonimo' }}
+                {{ __('ui.by') }} {{ $article->user?->name ?? __('ui.anonymous') }}
             </small>
 
             {{-- Auth --}}
             @auth
                 @if ($article?->id)
                     <a href="{{ route('articles.show', ['article' => $article->id]) }}" class="btn btn-outline-dark btn-sm">
-                        Dettaglio
+                        {{ __('ui.details') }}
                     </a>
                 @else
-                    <span class="text-muted small">Dettaglio non disponibile</span>
+                    <span class="text-muted small">{{ __('ui.details_not_available') }}</span>
                 @endif
             @else
                 <a href="{{ route('login') }}" class="btn btn-outline-secondary btn-sm">
-                    Accedi per leggere
+                    {{ __('ui.login_to_read') }}
                 </a>
             @endauth
 
@@ -44,7 +44,7 @@
 
     <div class="card-footer bg-white">
         <small class="text-muted">
-            Pubblicato: {{ $article->created_at->format('d/m/Y') }}
+            {{ __('ui.published_at') }}: {{ $article->created_at->format('d/m/Y') }}
         </small>
     </div>
 </div>
