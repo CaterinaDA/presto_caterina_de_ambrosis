@@ -4,11 +4,17 @@ namespace App\Livewire;
 
 use App\Models\Article;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 
 class CreateArticleForm extends Component
 {
+    use WithFileUploads;
+
+    public $temporary_images = [];
+    public $images = [];
+
     #[Validate('required|min:3')]
     public $title = '';
 
@@ -22,11 +28,28 @@ class CreateArticleForm extends Component
     public $category_id = '';
 
 
+    public function updatedTemporaryImages()
+    {
+        $this->validate([
+            'temporary_images.*' => 'image|max:2048',
+        ]);
+
+        foreach ($this->temporary_images as $image) {
+            $this->images[] = $image;
+        }
+    }
+
+    public function removeImage($key)
+    {
+        unset($this->images[$key]);
+        $this->images = array_values($this->images);
+    }
+
     public function store()
     {
         $this->validate();
 
-        Article::create([
+        $article = Article::create([
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
@@ -34,20 +57,20 @@ class CreateArticleForm extends Component
             'user_id' => Auth::id(),
         ]);
 
+        foreach ($this->images as $image) {
+            $path = $image->store('articles', 'public');
+
+            $article->images()->create([
+                'path' => $path,
+            ]);
+        }
+
+        $this->temporary_images = [];
+
         session()->flash('success', 'Annuncio inserito correttamente');
 
         $this->reset();
     }
-
-
-
-
-
-
-
-
-
-
 
     public function render()
     {

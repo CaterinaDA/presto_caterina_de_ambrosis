@@ -43,6 +43,41 @@
         @enderror
     </div>
 
+    {{-- Upload immagini multiple --}}
+    <div class="mb-3">
+        <label class="form-label">Immagini</label>
+
+        <input type="file" class="form-control" wire:model="temporary_images" multiple>
+
+        @error('temporary_images.*')
+            <small class="text-danger">{{ $message }}</small>
+        @enderror
+
+        <div wire:loading wire:target="temporary_images" class="small text-muted mt-2">
+            Caricamento immagini...
+        </div>
+    </div>
+
+    {{-- Preview + rimozione --}}
+    @if (!empty($images))
+        <div class="row mt-3">
+            @foreach ($images as $key => $image)
+                <div class="col-12 col-md-4 mb-3">
+                    <div class="card shadow-sm">
+                        <img src="{{ $image->temporaryUrl() }}" class="img-fluid rounded-top" alt="preview">
+
+                        <div class="card-body text-center">
+                            <button type="button" class="btn btn-danger btn-sm"
+                                wire:click="removeImage({{ $key }})">
+                                Rimuovi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
     <button class="btn btn-warning fw-semibold">
         Inserisci annuncio
     </button>

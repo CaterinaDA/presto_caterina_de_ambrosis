@@ -46,4 +46,5 @@ return [
   'login_to_read' => 'Login to read',
   'published_at' => 'Published',
 
+  'no_images' => 'No images available',
 ];

@@ -10,7 +10,7 @@ class PublicController extends Controller
     public function homepage()
     {
         $articles = Article::where('is_accepted', true)
-            ->with(['category', 'user'])
+            ->with(['category', 'user', 'images'])
             ->latest()
             ->take(6)
             ->get();

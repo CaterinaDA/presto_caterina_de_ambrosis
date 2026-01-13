@@ -1,4 +1,21 @@
+@php
+    use Illuminate\Support\Facades\Storage;
+    $cover = $article->images->first();
+@endphp
+
 <div class="card h-100 shadow-sm card-w">
+
+    {{-- Immagine --}}
+    <div class="card-image-wrapper">
+        @if ($cover)
+            <img src="{{ Storage::url($cover->path) }}" loading="lazy" alt="Immagine di copertina annuncio">
+        @else
+            <div class="card-image-placeholder">
+                <small>{{ __('ui.no_images') }}</small>
+            </div>
+        @endif
+    </div>
+
     <div class="card-body d-flex flex-column">
 
         <div class="d-flex justify-content-between align-items-start mb-2">

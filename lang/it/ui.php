@@ -46,4 +46,5 @@ return [
   'login_to_read' => 'Accedi per leggere',
   'published_at' => 'Pubblicato',
 
+  'no_images' => 'Nessuna immagine disponibile',
 ];

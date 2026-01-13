@@ -16,7 +16,7 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::where('is_accepted', true)
-            ->with(['category', 'user'])
+            ->with(['category', 'user', 'images'])
             ->latest()
             ->paginate(9);
 
@@ -29,7 +29,7 @@ class ArticleController extends Controller
             abort(404);
         }
 
-        $article->load(['category', 'user']);
+        $article->load(['category', 'user', 'images']);
         return view('article.show', compact('article'));
     }
 
@@ -37,7 +37,7 @@ class ArticleController extends Controller
     {
         $articles = $category->articles()
             ->where('is_accepted', true)
-            ->with(['category', 'user'])
+            ->with(['category', 'user', 'images'])
             ->latest()
             ->paginate(9);
 
