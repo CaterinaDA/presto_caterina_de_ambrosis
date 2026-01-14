@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Article;
+use App\Jobs\ResizeImage;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\Attributes\Validate;
@@ -63,6 +64,8 @@ class CreateArticleForm extends Component
             $article->images()->create([
                 'path' => $path,
             ]);
+
+            ResizeImage::dispatch(300, 300, $path);
         }
 
         $this->temporary_images = [];

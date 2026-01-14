@@ -1,5 +1,3 @@
-@php use Illuminate\Support\Facades\Storage; @endphp
-
 <x-layout>
     <div class="container py-5">
 
@@ -23,7 +21,7 @@
                         @foreach ($article_to_check->images as $image)
                             <div class="col-12 col-md-4">
                                 <div class="revisor-image-box">
-                                    <img src="{{ Storage::url($image->path) }}" loading="lazy" alt="Immagine articolo">
+                                    <img src="{{ $image->getUrl(300, 300) }}" loading="lazy" alt="Immagine articolo">
                                 </div>
                             </div>
                         @endforeach

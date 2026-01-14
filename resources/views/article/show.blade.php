@@ -1,5 +1,3 @@
-@php use Illuminate\Support\Facades\Storage; @endphp
-
 <x-layout>
     <div class="container py-5">
 
@@ -28,7 +26,7 @@
                         @foreach ($article->images as $key => $image)
                             <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                                 <div class="article-carousel-wrapper">
-                                    <img src="{{ Storage::url($image->path) }}" class="d-block" loading="lazy"
+                                    <img src="{{ $image->getUrl(300, 300) }}" class="d-block" loading="lazy"
                                         alt="Immagine {{ $key + 1 }} dell'articolo">
                                 </div>
                             </div>

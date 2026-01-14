@@ -1,5 +1,4 @@
 @php
-    use Illuminate\Support\Facades\Storage;
     $cover = $article->images->first();
 @endphp
 
@@ -8,7 +7,7 @@
     {{-- Immagine --}}
     <div class="card-image-wrapper">
         @if ($cover)
-            <img src="{{ Storage::url($cover->path) }}" loading="lazy" alt="Immagine di copertina annuncio">
+            <img src="{{ $cover->getUrl(300, 300) }}" loading="lazy" alt="Immagine di copertina annuncio">
         @else
             <div class="card-image-placeholder">
                 <small>{{ __('ui.no_images') }}</small>
