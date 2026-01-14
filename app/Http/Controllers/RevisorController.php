@@ -15,7 +15,8 @@ class RevisorController extends Controller
 {
     public function index()
     {
-        $article_to_check = Article::where('is_accepted', null)
+        $article_to_check = Article::whereNull('is_accepted')
+            ->with(['category', 'user', 'images'])
             ->orderBy('created_at', 'asc')
             ->first();
 
